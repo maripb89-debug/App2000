@@ -1,0 +1,89 @@
+
+
+
+body {
+    font-family: sans-serif;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+h1 {
+    color: #17324d;
+    font-size: 2.5rem;
+    line-height: 1.2;
+}
+
+textarea {
+    width: 320px;
+    height: 40px;
+    max-width: 100%;
+    box-sizing: border-box;
+    resize: none;
+}
+
+.input-rad {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+#huskeliste li:nth-child(odd) {
+    background-color: lightblue;
+}
+
+#huskeliste li:nth-child(even) {
+    background-color: lightgray;
+}
+
+#huskeliste {
+    padding-left: 0;
+    list-style: none;
+}
+
+#huskeliste li {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    cursor: pointer;
+}
+
+#huskeliste li:hover {
+    background-color: #9fc5e8;
+}
+
+#huskeliste li button {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.ferdig {
+    text-decoration: line-through;
+    color: gray;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    textarea {
+        width: 100%;
+    }
+
+    #leggTilKnapp {
+        width: 100%;
+    }
+}
