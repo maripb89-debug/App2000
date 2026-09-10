@@ -10,6 +10,7 @@ Dette dokumentet forklarer hvordan CSS-en er bygget opp, hvordan JavaScript-en e
 ├── index.html              Forside
 ├── turer.html               Utforsk turer (filter + resultatliste)
 ├── tur.html                 Turdetalj (?slug=... i URL)
+├── ny-tur.html               Skjema for å legge til en egen tur (lagres i localStorage)
 ├── hytter.html               Utforsk hytter (filter + resultatliste)
 ├── hytte.html                Hyttedetalj (?slug=... i URL)
 ├── kart.html                 Kart-plassholder
@@ -60,6 +61,7 @@ Ren data, ingen logikk. Definerer `AKTIVITETER`, `REGIONER`, `TURER` (array av t
 - `ICONS` / `iconSvg()` — små innebygde SVG-ikoner (footer, kort, meny), ingen ikon-bibliotek.
 - `getFavorites()` / `toggleFavorite()` / `isFavorite()` — leser og skriver til `localStorage` under nøkkelen `ut-favoritter`.
 - `wireFavButtons()` — kobler klikk-hendelse til alle hjerte-knapper på siden.
+- `getEgneTurer()` / `leggTilEgenTur()` — samme localStorage-mønster som favoritter, men for turer brukeren selv legger til via `ny-tur.html` (nøkkel `ut-egne-turer`). `turer.js` og `tur-detail.js` slår disse sammen med `TURER` fra data.js (`TURER.concat(getEgneTurer())`), slik at egne turer vises i utforskeren og kan åpnes på egen detaljside. Skjemaet spør bare om turnavn, litt info, km-lengde og aktivitetstype — resten av feltene (region, sesong, startpunkt osv.) fylles med fornuftige standardverdier, så egne turer forsvinner fra resultatlisten hvis man filtrerer på region/sesong/vanskelighet (siden de ikke har noen ekte verdi der).
 - `tripCardHtml()` / `cabinCardHtml()` — bygger HTML-strengen for ett tur-/hyttekort. Brukes av `home.js`, `turer.js`, `hytter.js`, `mine-turer.js` og detalj-sidene (for «lignende turer»/«andre hytter»), slik at alle kort ser like ut uansett hvilken side de vises på.
 - `initNav()` — kobler hamburgermeny-knappen, og setter `active`-klasse på riktig nav-lenke basert på `<body data-page="...">`.
 

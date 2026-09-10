@@ -87,6 +87,76 @@ function wireFavButtons(root) {
   });
 }
 
+/* ---------- Egne turer (localStorage) ----------
+   Samme mønster som favoritter over: brukerens egne turer (fra "Legg til ny tur"-skjemaet
+   på turer.html) lagres som JSON-tekst i localStorage, og vises sammen med de faste
+   turene fra data.js — men bare i nettleseren/enheten de ble lagt til i. */
+
+const EGNE_TURER_KEY = "ut-egne-turer";
+
+// Henter brukerens egne turer. Tomt array hvis ingenting er lagret ennå eller dataene er ødelagt.
+function getEgneTurer() {
+  try {
+    return JSON.parse(localStorage.getItem(EGNE_TURER_KEY)) || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+// Gjør en tittel om til et url-vennlig "slug" ("Rundt Blåfjell" -> "rundt-blafjell").
+function slugify(tekst) {
+  return (
+    tekst
+      .toLowerCase()
+      .replace(/æ/g, "ae")
+      .replace(/ø/g, "o")
+      .replace(/å/g, "a")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "tur"
+  );
+}
+
+// Finner et slug som ikke allerede er i bruk, verken blant de faste eller de egne turene.
+function uniktTurSlug(base) {
+  const finnes = (s) => TURER.some((t) => t.slug === s) || getEgneTurer().some((t) => t.slug === s);
+  let slug = base;
+  let i = 2;
+  while (finnes(slug)) {
+    slug = `${base}-${i}`;
+    i++;
+  }
+  return slug;
+}
+
+// Lagrer en ny, brukeropprettet tur. Fyller inn fornuftige standardverdier for feltene
+// skjemaet ikke spør om (region, sesong osv.), slik at turen fortsatt fungerer fint
+// på kort, detaljside og i filtrene — den vises bare ikke når noen av de filtrene brukes.
+function leggTilEgenTur({ tittel, kort, lengdeKm, aktivitet }) {
+  const tur = {
+    id: `egen-${Date.now()}`,
+    slug: uniktTurSlug(slugify(tittel)),
+    tittel,
+    aktivitet,
+    region: "Ikke oppgitt",
+    sesong: [],
+    vanskelighet: "Ikke oppgitt",
+    lengdeKm: Number(lengdeKm) || 0,
+    varighetTimer: null,
+    stigningM: null,
+    startpunkt: "Ikke oppgitt",
+    koordinater: { lat: 61.0, lng: 9.0 },
+    farge: "#3f6b4f",
+    kort,
+    beskrivelse: kort,
+    tips: [],
+    egen: true,
+  };
+  const liste = getEgneTurer();
+  liste.push(tur);
+  localStorage.setItem(EGNE_TURER_KEY, JSON.stringify(liste));
+  return tur;
+}
+
 /* ---------- Meny (mobil) ---------- */
 
 // Kjøres én gang når siden lastes (se DOMContentLoaded nederst).

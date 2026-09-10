@@ -3,7 +3,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Hvilken tur skal vises? Står i URL-en, f.eks. tur.html?slug=besseggen.
   const slug = new URLSearchParams(window.location.search).get("slug");
-  const t = TURER.find((x) => x.slug === slug);
+  // Faste turer fra data.js + eventuelle turer brukeren selv har lagt til (localStorage, app.js).
+  const alleTurer = TURER.concat(getEgneTurer());
+  const t = alleTurer.find((x) => x.slug === slug);
 
   // Ingen tur med denne slugen finnes → vis "fant ikke"-melding og stopp her.
   if (!t) {
@@ -56,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // "Lignende turer" nederst: samme aktivitet ELLER samme region som denne turen,
   // uten å telle med turen selv, og maks 3 stykker.
-  const related = TURER.filter(
+  const related = alleTurer.filter(
     (x) => x.slug !== t.slug && (x.aktivitet === t.aktivitet || x.region === t.region)
   ).slice(0, 3);
   const relatedEl = document.getElementById("related-trips");

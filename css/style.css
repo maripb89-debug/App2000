@@ -543,6 +543,16 @@ section.block.alt { background: var(--forest-50); }
 .page-head h1 { color: #fff; margin-bottom: 10px; }
 .page-head p { color: rgba(255,255,255,0.75); margin: 0; font-size: 1.4rem; }
 
+.page-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.page-head-row > div { flex: 1 1 420px; min-width: 0; }
+.page-head-row .btn { flex: 0 0 auto; }
+
 .explorer-layout {
   display: grid;
   grid-template-columns: 420px 1fr;
@@ -980,7 +990,9 @@ section.block.alt { background: var(--forest-50); }
   color: var(--forest-900);
 }
 
-.auth-form input {
+.auth-form input,
+.auth-form textarea,
+.auth-form select {
   width: 100%;
   font-family: var(--font-body);
   font-size: 1.3rem;
@@ -991,7 +1003,14 @@ section.block.alt { background: var(--forest-50); }
   color: var(--ink);
 }
 
-.auth-form input:focus {
+.auth-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.auth-form input:focus,
+.auth-form textarea:focus,
+.auth-form select:focus {
   outline: none;
   border-color: var(--forest-500);
   box-shadow: 0 0 0 3px var(--forest-100);

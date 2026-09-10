@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Utforsk turer — Stifinner</title>
-<meta name="description" content="Filtrer turforslag på aktivitet, region, sesong og vanskelighetsgrad." />
+<title>Legg til ny tur — Stifinner</title>
+<meta name="description" content="Legg til en egen tur i Stifinner-demoen." />
 <link rel="icon" type="image/svg+xml" href="bilder/favicon/favicon.svg" />
 <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -34,56 +34,31 @@
 
 <div class="page-body">
 
-<div class="page-head">
-  <div class="wrap page-head-row">
-    <div>
-      <h1>Utforsk turer</h1>
-      <p>Filtrer på aktivitet, region, sesong og vanskelighetsgrad. Vil du overnatte, se <a style="color:#fff;text-decoration:underline;" href="hytter.html">hyttene</a> i stedet.</p>
-    </div>
-    <a class="btn btn-amber" href="ny-tur.html">+ Legg til ny tur</a>
+<section class="wrap auth-block">
+  <div class="auth-card">
+    <h1>Legg til ny tur</h1>
+    <p>Turen lagres i nettleseren din og dukker opp sammen med de andre turene i utforskeren.</p>
+    <form class="auth-form" id="ny-tur-form" novalidate>
+      <label>
+        Turnavn
+        <input type="text" name="tittel" required />
+      </label>
+      <label>
+        Litt info
+        <textarea name="kort" required></textarea>
+      </label>
+      <label>
+        Lengde (km)
+        <input type="number" name="lengdeKm" min="0" step="0.1" required />
+      </label>
+      <label>
+        Type tur
+        <select name="aktivitet" id="ny-tur-aktivitet" required></select>
+      </label>
+      <button class="btn btn-primary" type="submit">Lagre tur</button>
+    </form>
   </div>
-</div>
-
-<div class="wrap explorer-layout">
-  <aside class="filter-panel">
-    <h4>Søk</h4>
-    <input type="search" id="f-search" placeholder="Søk etter tur" />
-
-    <h4>Aktivitet</h4>
-    <div class="chip-group" id="f-aktivitet" data-group="aktivitet"></div>
-
-    <h4>Region</h4>
-    <div class="chip-group" id="f-region" data-group="region"></div>
-
-    <h4>Sesong</h4>
-    <div class="chip-group" id="f-sesong" data-group="sesong">
-      <button class="chip" data-value="sommer">Sommer</button>
-      <button class="chip" data-value="høst">Høst</button>
-      <button class="chip" data-value="vinter">Vinter</button>
-      <button class="chip" data-value="vår">Vår</button>
-    </div>
-
-    <h4>Vanskelighetsgrad</h4>
-    <div class="chip-group" id="f-vanskelighet" data-group="vanskelighet">
-      <button class="chip" data-value="Enkel">Enkel</button>
-      <button class="chip" data-value="Middels">Middels</button>
-      <button class="chip" data-value="Krevende">Krevende</button>
-    </div>
-
-    <button class="reset-link" id="f-reset" style="margin-top:18px;">Nullstill filter</button>
-  </aside>
-
-  <div>
-    <div class="results-bar">
-      <span id="result-count"></span>
-    </div>
-    <div class="card-grid" id="results"></div>
-    <div class="empty-state" id="empty-state" style="display:none;">
-      <p>Ingen turer matcher filteret ditt. Prøv å fjerne noen filter.</p>
-      <button class="btn btn-ghost" id="empty-reset">Nullstill filter</button>
-    </div>
-  </div>
-</div>
+</section>
 
 </div>
 
@@ -132,6 +107,24 @@
 <script src="js/data.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/app.js"></script>
-<script src="js/turer.js"></script>
+<script>
+  // Fyller "Type tur"-nedtrekket ut fra AKTIVITETER i data.js, samme liste som filteret på turer.html.
+  const aktivitetSelect = document.getElementById("ny-tur-aktivitet");
+  aktivitetSelect.innerHTML = Object.keys(AKTIVITETER)
+    .map((key) => `<option value="${key}">${AKTIVITETER[key].navn}</option>`)
+    .join("");
+
+  document.getElementById("ny-tur-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const tur = leggTilEgenTur({
+      tittel: form.tittel.value.trim(),
+      kort: form.kort.value.trim(),
+      lengdeKm: form.lengdeKm.value,
+      aktivitet: form.aktivitet.value,
+    });
+    window.location.href = `tur.html?slug=${tur.slug}`;
+  });
+</script>
 </body>
 </html>

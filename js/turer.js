@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // (turer.html?aktivitet=fottur) eller et søk i søkeboksen (turer.html?q=...).
   const params = new URLSearchParams(window.location.search);
 
+  // Faste turer fra data.js + eventuelle turer brukeren selv har lagt til (localStorage, app.js).
+  const alleTurer = TURER.concat(getEgneTurer());
+
   // `state` er "alt som er valgt akkurat nå". aktivitet/region/sesong/vanskelighet er Set-er
   // (mengder) — de sier bare "er denne verdien valgt eller ikke", og gjør det raskt å
   // legge til/fjerne/sjekke uten å lete gjennom et vanlig array selv.
@@ -63,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Tegner resultatlisten på nytt. Kalles etter alle endringer (søk, chip-klikk, nullstill).
   function render() {
-    const list = TURER.filter(matches);
+    const list = alleTurer.filter(matches);
     countEl.textContent = `${list.length} ${list.length === 1 ? "tur" : "turer"} funnet`;
     resultsEl.innerHTML = list.map(tripCardHtml).join(""); // fra app.js
     resultsEl.style.display = list.length ? "grid" : "none";
