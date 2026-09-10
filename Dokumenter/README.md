@@ -21,6 +21,7 @@ Dette dokumentet forklarer hvordan CSS-en er bygget opp, hvordan JavaScript-en e
 └── js/
     ├── data.js                Alt innhold: turer, hytter, aktiviteter, regioner
     ├── app.js                 Delte funksjoner brukt av alle sider
+    ├── auth.js                 Enkel innlogging/utlogging (localStorage), brukt av alle sider
     ├── home.js                 Rendrer forsiden
     ├── turer.js / hytter.js     Filter- og søkelogikk for utforsker-sidene
     ├── tur-detail.js / hytte-detail.js   Rendrer detaljsidene
@@ -68,6 +69,7 @@ Hver side har ett script som gjør akkurat det den siden trenger:
 
 | Fil | Side | Gjør |
 |---|---|---|
+| `auth.js` | Alle sider | Enkel innlogging/utlogging mot `localStorage`, styrer «Logg inn»/«Logg ut» i header |
 | `home.js` | index.html | Rendrer aktivitetskort, 4 utvalgte turer, 4 utvalgte hytter, regionslenker |
 | `turer.js` | turer.html | Filter (aktivitet/region/sesong/vanskelighet) + søk over `TURER` |
 | `hytter.js` | hytter.html | Filter (region/type) + søk over `HYTTER` |

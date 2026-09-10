@@ -1,3 +1,9 @@
+// Huskelister (pakkelister) for dagstur og overnattingstur.
+// Hver liste lagres i sin egen nøkkel i localStorage, slik at avkryssing og
+// egne tillegg huskes neste gang siden åpnes.
+
+// Beskriver de to listene vi tilbyr og hva de starter med ("standard"-punktene).
+// id-en brukes til å bygge en unik localStorage-nøkkel per liste (se checklistKey).
 const CHECKLISTS = [
   {
     id: "dagstur",
@@ -29,35 +35,41 @@ const CHECKLISTS = [
   },
 ];
 
+// Bygger localStorage-nøkkelen for én bestemt liste, f.eks. "ut-huskeliste-dagstur".
 function checklistKey(id) {
-    return `ut-huskeliste-${id}`;
+  return `ut-huskeliste-${id}`;
 }
 
-
-//Henter punktene for en liste
+// Henter punktene for én liste. Hvert punkt er et objekt: { tekst, ferdig } (ferdig = avhuket eller ikke).
+// Hvis brukeren aldri har lagret noe for denne listen (eller lagringen er ødelagt),
+// bygger vi startlisten fra list.standard i stedet, alle satt til "ikke ferdig".
 function loadList(list) {
-    const raw = localStorage.getItem(checklistKey(list.id));
-    if(raw){
-        try{
-            return JSON.parse(raw);
-        } catch(e) {
-            //Default
-        }
+  const raw = localStorage.getItem(checklistKey(list.id));
+  if (raw) {
+    try {
+      return JSON.parse(raw);
+    } catch (e) {
+      /* falls through to default below */
     }
-    return list.standard.map((tekst) => ({tekst, ferdig: false}));
+  }
+  return list.standard.map((tekst) => ({ tekst, ferdig: false }));
 }
 
-//Lagrer punktene for en liste til localStorage(JSON)
-function saveList(id, items){
-    localStorage.setItem(chekclistKey(id), JSON.stringify(items));
+// Lagrer punktene for én liste tilbake til localStorage (som JSON-tekst).
+function saveList(id, items) {
+  localStorage.setItem(checklistKey(id), JSON.stringify(items));
 }
 
-function renderClickList(list){
-    const items = loadList(list);
+// Bygger og "kobler til" ett komplett huskeliste-kort (checkbokser, "legg til"-felt, nullstill-knapp).
+// Returnerer selve DOM-elementet (<div class="checklist-card">...), klart til å settes inn i siden.
+function renderChecklistCard(list) {
+  const items = loadList(list); // items holdes i minnet mens siden er åpen, og lagres på nytt ved hver endring
 
-    const card = document.createElement("div");
-    card.className = "checklist-card";
-    card.innerHTML = `
+  // Bygger selve kortets "skall" med document.createElement + innerHTML,
+  // med tomme plassholdere (#items-... og et input-felt) som fylles/oppdateres av draw() under.
+  const card = document.createElement("div");
+  card.className = "checklist-card";
+  card.innerHTML = `
     <h3>${list.navn} <button class="reset-link" data-reset="${list.id}">Nullstill</button></h3>
     <div class="checklist-items" id="items-${list.id}"></div>
     <div class="add-item-row">
@@ -66,9 +78,11 @@ function renderClickList(list){
     </div>
   `;
 
-  function draw(){
+  // Tegner selve punktene på nytt ut fra `items`-arrayet. Kalles hver gang noe endres
+  // (avkrysning, fjerning, tillegg, nullstilling) slik at det som vises alltid stemmer med dataene.
+  function draw() {
     const itemsEl = card.querySelector(`#items-${list.id}`);
-     itemsEl.innerHTML = items
+    itemsEl.innerHTML = items
       .map(
         (it, i) => `
         <div class="checklist-item ${it.ferdig ? "done" : ""}">
@@ -80,6 +94,20 @@ function renderClickList(list){
       .join("");
   }
 
+  // "change"-hendelsen fyres når en checkbox blir krysset av/fjernet.
+  // e.target.matches(...) sjekker at det faktisk var en checkbox som utløste hendelsen
+  // (siden hendelsen kan boble opp fra hva som helst inni kortet).
+  card.addEventListener("change", (e) => {
+    if (e.target.matches("input[type=checkbox]")) {
+      const idx = Number(e.target.dataset.idx); // data-idx forteller hvilket punkt i items-arrayet dette er
+      items[idx].ferdig = e.target.checked;
+      saveList(list.id, items);
+      draw();
+    }
+  });
+
+  // Ett samlet "click"-lyttepunkt for alle tre knappe-typene (fjern, legg til, nullstill),
+  // i stedet for én lytter per knapp — enklere når knappene tegnes på nytt hele tiden.
   card.addEventListener("click", (e) => {
     if (e.target.matches("[data-remove]")) {
       const idx = Number(e.target.dataset.remove);
@@ -105,7 +133,8 @@ function renderClickList(list){
       draw();
     }
   });
- // Gjør at man kan trykke Enter i tekstfeltet for å legge til punktet,
+
+  // Gjør at man kan trykke Enter i tekstfeltet for å legge til punktet,
   // i stedet for å måtte klikke "Legg til"-knappen med musa.
   card.querySelector(`#input-${list.id}`).addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
@@ -116,9 +145,10 @@ function renderClickList(list){
 
   draw(); // tegn punktene med det samme, før kortet vises
   return card;
-
 }
+
+// Lager ett kort per liste i CHECKLISTS, og setter dem inn i rutenettet på siden.
 document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("checklist-grid");
-  CHECKLISTS.forEach((list) => grid.appendChild(renderClickList(list)));
+  CHECKLISTS.forEach((list) => grid.appendChild(renderChecklistCard(list)));
 });

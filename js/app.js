@@ -1,5 +1,10 @@
+/* Delte funksjoner: ikoner, favoritter (localStorage), kort-rendering, meny.
+   Alt kjører i nettleseren — ingen server, ingen fetch mot eksterne API-er.
+   Denne fila lastes på HVER side (se <script src="js/app.js"> i HTML-en),
+   slik at alle sidene kan bruke de samme funksjonene uten å skrive dem flere ganger. */
 
-
+// Et oppslagsverk (object) fra ikon-navn til rå SVG-"innhold" (bare <path>/<circle>/... uten selve <svg>-taggen).
+// Å holde disse som tekst-strenger gjør at vi enkelt kan lime dem inn i en <svg> senere med iconSvg().
 const ICONS = {
   fottur: '<path d="M3 18l6-10 4 6 2-3 6 7z"/>',
   skitur: '<line x1="4" y1="20" x2="9" y2="5"/><line x1="15" y1="20" x2="20" y2="5"/><circle cx="6.5" cy="4" r="1.3"/><circle cx="17.5" cy="4" r="1.3"/>',
@@ -17,73 +22,99 @@ const ICONS = {
   up: '<path d="M4 19h16M6 19V9l6-6 6 6v10"/>',
 };
 
+// Bygger en komplett, klar-til-bruk <svg>-tag som streng, for et gitt ikon-navn (nøkkel i ICONS).
+// `cls` er en valgfri CSS-klasse man kan gi ikonet (f.eks. for å style størrelse et bestemt sted).
+// Malen (template literal med backticks) setter alltid samme faste attributter (viewBox, stroke osv.),
+// og limer inn riktig <path>-innhold fra ICONS midt i. Ligger navnet ikke i ICONS, blir det bare et tomt ikon.
 function iconSvg(name, cls) {
   return `<svg class="${cls || ""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ""}</svg>`;
 }
 
-const FAV_KEY = "ut_favoritter";
+/* ---------- Favoritter (localStorage) ----------
+   Samme mønster som innlogging i auth.js: en liste lagres som JSON-tekst
+   under én nøkkel i localStorage, og hentes/oppdateres via noen hjelpefunksjoner. */
 
-function getFavorites(){
+const FAV_KEY = "ut-favoritter"; // nøkkelen favorittlisten ligger under i localStorage
 
-    //Get Favorite
-    try{
-        return Json.parse(localStorage.getItem(FAV_KEY)) || [];  
-    } catch(e) {
-        return[];
-    }
+// Henter hele favorittlisten. Hver favoritt er et lite objekt: { type, slug, lagtTil }.
+// Returnerer tomt array hvis ingenting er lagret ennå, eller hvis dataene er ødelagt.
+function getFavorites() {
+  try {
+    return JSON.parse(localStorage.getItem(FAV_KEY)) || [];
+  } catch (e) {
+    return [];
+  }
 }
 
-function isFavortite(type, slug) {
-    return getFavorites().some((f) => f.type === type && f.slug === slug);
+// Sjekker om ÉN bestemt tur/hytte allerede er lagret som favoritt.
+// `type` er "tur" eller "hytte", `slug` er den unike id-en/"webadresse-vennlige navnet" til den.
+// .some() returnerer true hvis MINST ett element i listen matcher begge feltene.
+function isFavorite(type, slug) {
+  return getFavorites().some((f) => f.type === type && f.slug === slug);
 }
 
-function toggleFavorite(type, slug){
-
-const favs = getFavorites();
-
-const idx=fav.findIndex((f) => f.type === type && f.slug === slug);
-if(idx >= 0) {
+// Legger til ELLER fjerner en favoritt, avhengig av om den allerede finnes ("toggle" = "vippebryter").
+// Returnerer true/false for om den NÅ er favoritt etter operasjonen (brukes til å style knappen riktig).
+function toggleFavorite(type, slug) {
+  const favs = getFavorites();
+  // findIndex gir posisjonen (0, 1, 2 ...) til treffet i listen, eller -1 hvis den ikke finnes.
+  const idx = favs.findIndex((f) => f.type === type && f.slug === slug);
+  if (idx >= 0) {
+    // Fantes allerede → fjern den ett element fra og med posisjon idx.
     favs.splice(idx, 1);
-}else{
-    favs.push({type, slug, lagtTil: new Date().toString() });
-}
-localStorage.setItem(FAV_KEY, JSON.stringify(favs));
-return idx < 0;
-}
-
-//koble til hjerte knapp fuksjonalitet(fav knapp)
-function wireFavButtons(root){
-    (root || document).querrySelectorAll(".fav-btn").forEach((btn) => {
-      const { type, slug } = btn.sataset;
-      if(isFavortite(type, slug)) btn.classList.add("active");
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stoppPropagation();
-        const nowActive = toggleFavorite(type, slug);
-        btn.classList.toggle("active", nowActive);
-      } );
-    } );
+  } else {
+    // Fantes ikke → legg til en ny favoritt bakerst i listen.
+    favs.push({ type, slug, lagtTil: new Date().toISOString() });
+  }
+  localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+  return idx < 0; // true hvis den IKKE fantes fra før (altså: den er favoritt nå, etter at vi la den til)
 }
 
-// --------- Mobil Meny -------
+// Kobler klikk-funksjonalitet til alle hjerte-knapper (.fav-btn) inni et gitt element (eller hele
+// siden, hvis ingenting sendes inn). Kalles hver gang vi har tegnet nye kort med innerHTML,
+// siden innerHTML lager helt nye DOM-elementer som ikke har noen "lyttere" ennå.
+function wireFavButtons(root) {
+  (root || document).querySelectorAll(".fav-btn").forEach((btn) => {
+    // data-type og data-slug ligger som data-attributter på knappen i HTML-malen (se tripCardHtml).
+    const { type, slug } = btn.dataset;
+    if (isFavorite(type, slug)) btn.classList.add("active");
+    btn.addEventListener("click", (e) => {
+      e.preventDefault(); // knappen ligger inni en <a>-lenke — ikke naviger bort når vi bare klikker hjertet
+      e.stopPropagation(); // og ikke la klikket "boble opp" til lenken rundt heller
+      const nowActive = toggleFavorite(type, slug);
+      btn.classList.toggle("active", nowActive);
+    });
+  });
+}
 
+/* ---------- Meny (mobil) ---------- */
+
+// Kjøres én gang når siden lastes (se DOMContentLoaded nederst).
+// Gjør to ting: (1) kobler hamburger-knappen til å åpne/lukke mobilmenyen,
+// og (2) markerer riktig lenke i menyen som "aktiv" ut fra hvilken side vi er på.
 function initNav() {
-   const toggle = document.querrySelector(".nav-toggle");
-   if (toggle) {
+  const toggle = document.querySelector(".nav-toggle");
+  if (toggle) {
     toggle.addEventListener("click", () => {
+      // Legger til/fjerner CSS-klassen "nav-open" på <body> — selve visningen av menyen
+      // styres av CSS ut fra om denne klassen finnes eller ikke.
       document.body.classList.toggle("nav-open");
     });
-   }
-
-   const current = document.body.dataset.page;
-   if(current){
+  }
+  // data-page="..." står på <body> i hver HTML-fil (f.eks. data-page="hjem") og forteller
+  // hvilken side vi er på nå, slik at riktig menylenke kan få .active-styling.
+  const current = document.body.dataset.page;
+  if (current) {
     document.querySelectorAll(`.main-nav a[data-page="${current}"]`).forEach((a) => a.classList.add("active"));
-
-   }
+  }
 }
 
-// ---------- Innlogget/utlogget i header ----------
+/* ---------- Innlogget/utlogget i header ----------
+   #header-auth er "Logg inn"/"Registrer deg"-knappen i toppmenyen på HVER side (se HTML-en).
+   currentUser()/logoutUser() kommer fra auth.js, som nå også lastes inn på hver side. */
 
+// Bytter ut header-knappen med "Logg ut" hvis noen er innlogget, ellers lar den stå som den er
+// (vanlig lenke til Login.html, eller Register.html på selve innloggingssiden).
 function initAuthUI() {
   const btn = document.getElementById("header-auth");
   // typeof-sjekken er en ekstra sikkerhet i tilfelle auth.js av en eller annen grunn ikke er lastet.
@@ -101,9 +132,10 @@ function initAuthUI() {
   });
 }
 
+/* ---------- Formattering ---------- */
 
-//Formatering
-
+// Slår opp det "pene" visningsnavnet for en aktivitetsnøkkel (f.eks. "fottur" -> "Fottur"),
+// ved å se i AKTIVITETER-objektet fra data.js. Faller tilbake til selve nøkkelen hvis den mangler.
 function aktivitetNavn(key) {
   return (AKTIVITETER[key] && AKTIVITETER[key].navn) || key;
 }
@@ -165,4 +197,3 @@ document.addEventListener("DOMContentLoaded", () => {
   initNav();
   initAuthUI();
 });
-
