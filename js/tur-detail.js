@@ -56,6 +56,19 @@ document.addEventListener("DOMContentLoaded", () => {
     paintFav();
   });
 
+  // "Slett tur"-knappen finnes bare i HTML-en, men skal kun vises for turer brukeren
+  // selv har lagt til (t.egen === true) — de faste demo-turene fra data.js kan ikke slettes.
+  const deleteBtn = document.getElementById("side-delete");
+  if (t.egen) {
+    deleteBtn.hidden = false;
+    deleteBtn.addEventListener("click", () => {
+      if (confirm(`Slette «${t.tittel}»? Dette kan ikke angres.`)) {
+        slettEgenTur(t.slug);
+        window.location.href = "turer.html";
+      }
+    });
+  }
+
   // "Lignende turer" nederst: samme aktivitet ELLER samme region som denne turen,
   // uten å telle med turen selv, og maks 3 stykker.
   const related = alleTurer.filter(

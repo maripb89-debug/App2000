@@ -233,6 +233,9 @@ p {
   white-space: nowrap;
 }
 .btn:active { transform: translateY(1px); }
+/* .btn sets display:inline-flex, which (being an author style) overrides the browser's
+   default [hidden]{display:none} rule — so a hidden .btn would show up regardless. */
+.btn[hidden] { display: none; }
 
 .btn-primary {
   background: var(--forest-800);
@@ -252,6 +255,13 @@ p {
   color: #fff;
 }
 .btn-amber:hover { background: var(--amber-600); }
+
+.btn-danger {
+  background: transparent;
+  border-color: var(--danger);
+  color: var(--danger);
+}
+.btn-danger:hover { background: var(--danger); color: #fff; }
 
 .btn-sm { padding: 14px 26px; font-size: 0.75rem; }
 

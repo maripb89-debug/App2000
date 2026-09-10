@@ -157,6 +157,13 @@ function leggTilEgenTur({ tittel, kort, lengdeKm, aktivitet }) {
   return tur;
 }
 
+// Sletter en egen tur (ut fra slug) fra localStorage. Rører ikke TURER-arrayet fra
+// data.js — det finnes bare egne turer å slette her, de faste demo-turene er hardkodet.
+function slettEgenTur(slug) {
+  const liste = getEgneTurer().filter((t) => t.slug !== slug);
+  localStorage.setItem(EGNE_TURER_KEY, JSON.stringify(liste));
+}
+
 /* ---------- Meny (mobil) ---------- */
 
 // Kjøres én gang når siden lastes (se DOMContentLoaded nederst).
