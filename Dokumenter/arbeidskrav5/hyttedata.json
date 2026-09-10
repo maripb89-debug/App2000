@@ -1,0 +1,48 @@
+{
+  "hytter": [
+    {
+      "id": 1,
+      "slug": "gjendesheim",
+      "navn": "Gjendesheim",
+      "region": "Østlandet",
+      "type": "Betjent",
+      "kort": "Startpunkt for Besseggen, med full servering og god standard midt i Jotunheimen.",
+      "posisjon": { "lat": 61.4708, "lng": 8.7100 },
+      "kontakt": { "telefon": "61 23 89 00", "epost": "gjendesheim@dnt.no" },
+      "fasiliteter": ["Servering", "Dusj", "Bagasjeoppbevaring", "Butikk"],
+      "rom": [
+        { "type": "Dobbeltrom", "antallSenger": 2, "prisPerNatt": 890 },
+        { "type": "Sovesal", "antallSenger": 8, "prisPerNatt": 420 }
+      ]
+    },
+    {
+      "id": 2,
+      "slug": "fondsbu",
+      "navn": "Fondsbu",
+      "region": "Østlandet",
+      "type": "Betjent",
+      "kort": "Vakkert plassert ved Bygdin, populært utgangspunkt for turer i Jotunheimen.",
+      "posisjon": { "lat": 61.3944, "lng": 8.4297 },
+      "kontakt": { "telefon": "61 23 47 00", "epost": "fondsbu@dnt.no" },
+      "fasiliteter": ["Servering", "Dusj", "Tørkerom"],
+      "rom": [
+        { "type": "Enkeltrom", "antallSenger": 1, "prisPerNatt": 650 },
+        { "type": "Sovesal", "antallSenger": 6, "prisPerNatt": 400 }
+      ]
+    },
+    {
+      "id": 3,
+      "slug": "besseggen-buvasstolen",
+      "navn": "Bøvertun",
+      "region": "Vestlandet",
+      "type": "Selvbetjent",
+      "kort": "Enkel selvbetjent hytte uten servering, egnet for de som vil lage egen mat.",
+      "posisjon": { "lat": 61.6579, "lng": 8.3628 },
+      "kontakt": { "telefon": "61 21 29 90", "epost": "post@dnt.no" },
+      "fasiliteter": ["Vedovn", "Utedo"],
+      "rom": [
+        { "type": "Sovesal", "antallSenger": 12, "prisPerNatt": 350 }
+      ]
+    }
+  ]
+}
