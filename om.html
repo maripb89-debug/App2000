@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Om prosjektet — Stifinner</title>
+<meta name="description" content="Om Stifinner: en statisk demoside inspirert av ut.no, laget som skoleprosjekt." />
+<link rel="icon" type="image/svg+xml" href="bilder/favicon/favicon.svg" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="om">
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="index.html">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18l6-10 4 6 2-3 6 7z"/></svg></span>
+      Stifinner
+    </a>
+    <nav class="main-nav">
+      <a href="index.html" data-page="hjem">Hjem</a>
+      <a href="kart.html" data-page="kart">Kart</a>
+      <a href="turer.html" data-page="utforsker">Utforsker</a>
+      <a href="mine-turer.html" data-page="mine-turer">Mine turer</a>
+      <a href="huskelister.html" data-page="huskelister">Huskelister</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-ghost btn-sm" href="Login.html" id="header-auth">Logg inn</a>
+      <button class="nav-toggle" aria-label="Åpne meny">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-body">
+
+<div class="info-hero">
+  <div class="wrap">
+    <h1>Om Stifinner</h1>
+    <p>En statisk demoside inspirert av navigasjonen og strukturen på ut.no, bygget som øvingsoppgave uten backend, database eller eksterne API-kall.</p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-card">
+        <h3>Om prosjektet</h3>
+        <p>Alt innhold — turer, hytter, bilder som fargeflater og koordinater — ligger hardkodet i <code>js/data.js</code> og lastes direkte i nettleseren. Ingen data hentes fra internett, og siden fungerer like godt offline som online.</p>
+      </div>
+      <div class="about-card" id="kontakt">
+        <h3>Kontakt</h3>
+        <p>Dette er et skoleprosjekt (ArbeidsKrav 1) og har ingen reell support-kanal. I en videreutvikling ville dette vært et kontaktskjema eller en e-postadresse.</p>
+      </div>
+      <div class="about-card" id="personvern">
+        <h3>Personvern</h3>
+        <p>Siden lagrer kun to ting lokalt i din nettleser (localStorage): favoritter under «Mine turer» og innhold på «Huskelister». Ingenting sendes til en server — det finnes ingen server.</p>
+      </div>
+    </div>
+
+    <div class="about-card" style="margin-top:24px;">
+      <h3>Veien videre</h3>
+      <p>Neste steg i prosjektet er å koble et kartbibliotek til <a href="kart.html">kart-siden</a>, slik at turer og hytter vises som punkter på et faktisk kart. Alle objekter har allerede koordinater klare for dette.</p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color:#fff;">
+          <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18l6-10 4 6 2-3 6 7z"/></svg></span>
+          Stifinner
+        </div>
+        <p>Statisk demoside inspirert av ut.no, laget som øvingsoppgave. Ingen backend, database eller eksterne API-kall.</p>
+      </div>
+      <div>
+        <h5>Innhold</h5>
+        <ul>
+          <li><a href="turer.html">Turer</a></li>
+          <li><a href="hytter.html">Hytter</a></li>
+          <li><a href="kart.html">Kart</a></li>
+          <li><a href="huskelister.html">Huskelister</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Om siden</h5>
+        <ul>
+          <li><a href="om.html">Om prosjektet</a></li>
+          <li><a href="om.html#kontakt">Kontakt</a></li>
+          <li><a href="om.html#personvern">Personvern</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kolofon</h5>
+        <ul>
+          <li><a href="om.html">Skoleprosjekt – ArbeidsKrav 1</a></li>
+          <li><a href="https://www.ut.no/" target="_blank" rel="noopener">Inspirert av ut.no (DNT)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Stifinner-demo. Ikke tilknyttet DNT eller ut.no.</span>
+      <span>Bygget med HTML, CSS og vanilla JS</span>
+    </div>
+  </div>
+</footer>
+
+<script src="jsIkkeBruk/auth.js"></script>
+<script src="jsIkkeBruk/app.js"></script>
+</body>
+</html>

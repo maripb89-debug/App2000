@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Utforsk hytter — Stifinner</title>
+<meta name="description" content="Filtrer hytter på region og betjeningsgrad." />
+<link rel="icon" type="image/svg+xml" href="bilder/favicon/favicon.svg" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="utforsker">
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="index.html">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18l6-10 4 6 2-3 6 7z"/></svg></span>
+      Stifinner
+    </a>
+    <nav class="main-nav">
+      <a href="index.html" data-page="hjem">Hjem</a>
+      <a href="kart.html" data-page="kart">Kart</a>
+      <a href="turer.html" data-page="utforsker">Utforsker</a>
+      <a href="mine-turer.html" data-page="mine-turer">Mine turer</a>
+      <a href="huskelister.html" data-page="huskelister">Huskelister</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-ghost btn-sm" href="Login.html" id="header-auth">Logg inn</a>
+      <button class="nav-toggle" aria-label="Åpne meny">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-body">
+
+<div class="page-head">
+  <div class="wrap">
+    <h1>Utforsk hytter</h1>
+    <p>Filtrer på region og betjeningsgrad. Leter du etter en aktivitet i stedet, se <a style="color:#fff;text-decoration:underline;" href="turer.html">turene</a>.</p>
+  </div>
+</div>
+
+<div class="wrap explorer-layout">
+  <aside class="filter-panel">
+    <h4>Søk</h4>
+    <input type="search" id="f-search" placeholder="Søk etter hyttenavn eller sted …" />
+
+    <h4>Region</h4>
+    <div class="chip-group" id="f-region" data-group="region"></div>
+
+    <h4>Betjeningsgrad</h4>
+    <div class="chip-group" id="f-type" data-group="type">
+      <button class="chip" data-value="Betjent">Betjent</button>
+      <button class="chip" data-value="Selvbetjent">Selvbetjent</button>
+      <button class="chip" data-value="Ubetjent">Ubetjent</button>
+    </div>
+
+    <button class="reset-link" id="f-reset" style="margin-top:18px;">Nullstill filter</button>
+  </aside>
+
+  <div>
+    <div class="results-bar">
+      <span id="result-count"></span>
+    </div>
+    <div class="card-grid" id="results"></div>
+    <div class="empty-state" id="empty-state" style="display:none;">
+      <p>Ingen hytter matcher filteret ditt. Prøv å fjerne noen filter.</p>
+      <button class="btn btn-ghost" id="empty-reset">Nullstill filter</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color:#fff;">
+          <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18l6-10 4 6 2-3 6 7z"/></svg></span>
+          Stifinner
+        </div>
+        <p>Statisk demoside inspirert av ut.no, laget som øvingsoppgave. Ingen backend, database eller eksterne API-kall.</p>
+      </div>
+      <div>
+        <h5>Innhold</h5>
+        <ul>
+          <li><a href="turer.html">Turer</a></li>
+          <li><a href="hytter.html">Hytter</a></li>
+          <li><a href="kart.html">Kart</a></li>
+          <li><a href="huskelister.html">Huskelister</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Om siden</h5>
+        <ul>
+          <li><a href="om.html">Om prosjektet</a></li>
+          <li><a href="om.html#kontakt">Kontakt</a></li>
+          <li><a href="om.html#personvern">Personvern</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kolofon</h5>
+        <ul>
+          <li><a href="om.html">Skoleprosjekt – ArbeidsKrav 1</a></li>
+          <li><a href="https://www.ut.no/" target="_blank" rel="noopener">Inspirert av ut.no (DNT)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Stifinner-demo. Ikke tilknyttet DNT eller ut.no.</span>
+      <span>Bygget med HTML, CSS og vanilla JS</span>
+    </div>
+  </div>
+</footer>
+
+<script src="jsIkkeBruk/data.js"></script>
+<script src="jsIkkeBruk/auth.js"></script>
+<script src="jsIkkeBruk/app.js"></script>
+<script src="jsIkkeBruk/hytter.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title id="page-title">Tur — Stifinner</title>
+<link rel="icon" type="image/svg+xml" href="bilder/favicon/favicon.svg" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="utforsker">
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="index.html">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18l6-10 4 6 2-3 6 7z"/></svg></span>
+      Stifinner
+    </a>
+    <nav class="main-nav">
+      <a href="index.html" data-page="hjem">Hjem</a>
+      <a href="kart.html" data-page="kart">Kart</a>
+      <a href="turer.html" data-page="utforsker">Utforsker</a>
+      <a href="mine-turer.html" data-page="mine-turer">Mine turer</a>
+      <a href="huskelister.html" data-page="huskelister">Huskelister</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-ghost btn-sm" href="Login.html" id="header-auth">Logg inn</a>
+      <button class="nav-toggle" aria-label="Åpne meny">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-body">
+
+<div id="not-found" style="display:none;">
+  <div class="wrap" style="padding:80px 0; text-align:center;">
+    <h1>Fant ikke turen</h1>
+    <p>Turen du leter etter finnes ikke i denne demoen.</p>
+    <a class="btn btn-primary" href="turer.html">Tilbake til utforskeren</a>
+  </div>
+</div>
+
+<div id="trip-content" style="display:none;">
+  <div class="detail-hero" id="hero-bg">
+    <div class="wrap">
+      <span class="badge" id="hero-badge"></span>
+      <h1 id="hero-title"></h1>
+      <p id="hero-sub" style="color:rgba(255,255,255,0.85);margin:0;"></p>
+    </div>
+  </div>
+
+  <div class="wrap detail-layout">
+    <main>
+      <div class="stat-row">
+        <div class="stat"><div class="num" id="stat-lengde"></div><div class="lbl">Lengde</div></div>
+        <div class="stat"><div class="num" id="stat-varighet"></div><div class="lbl">Varighet</div></div>
+        <div class="stat"><div class="num" id="stat-stigning"></div><div class="lbl">Stigning</div></div>
+        <div class="stat"><div class="num" id="stat-vanskelighet"></div><div class="lbl">Vanskelighet</div></div>
+      </div>
+
+      <h2>Om turen</h2>
+      <p id="trip-desc"></p>
+
+      <h2>Tips til turen</h2>
+      <ul class="tip-list" id="trip-tips"></ul>
+
+      <h2>Kart</h2>
+      <div class="map-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-7.58 7-12a7 7 0 10-14 0c0 4.42 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/></svg>
+        <strong>Kartvisning kommer senere</strong>
+        <small id="trip-coords">Koordinater lagret, klar for kart-API</small>
+      </div>
+
+      <section style="margin-top:48px;">
+        <h2>Lignende turer</h2>
+        <div class="card-grid" id="related-trips"></div>
+      </section>
+    </main>
+
+    <aside class="side-panel">
+      <button class="btn btn-primary fav-btn-inline" id="side-fav" style="width:100%; border-radius:var(--radius-sm);"></button>
+      <div class="kv"><span class="k">Aktivitet</span><span class="v" id="side-aktivitet"></span></div>
+      <div class="kv"><span class="k">Region</span><span class="v" id="side-region"></span></div>
+      <div class="kv"><span class="k">Startpunkt</span><span class="v" id="side-start"></span></div>
+      <div class="kv"><span class="k">Sesong</span><span class="v" id="side-sesong"></span></div>
+      <a class="btn btn-ghost" style="width:100%;" href="huskelister.html">Lag pakkeliste</a>
+    </aside>
+  </div>
+</div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color:#fff;">
+          <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18l6-10 4 6 2-3 6 7z"/></svg></span>
+          Stifinner
+        </div>
+        <p>Statisk demoside inspirert av ut.no, laget som øvingsoppgave. Ingen backend, database eller eksterne API-kall.</p>
+      </div>
+      <div>
+        <h5>Innhold</h5>
+        <ul>
+          <li><a href="turer.html">Turer</a></li>
+          <li><a href="hytter.html">Hytter</a></li>
+          <li><a href="kart.html">Kart</a></li>
+          <li><a href="huskelister.html">Huskelister</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Om siden</h5>
+        <ul>
+          <li><a href="om.html">Om prosjektet</a></li>
+          <li><a href="om.html#kontakt">Kontakt</a></li>
+          <li><a href="om.html#personvern">Personvern</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kolofon</h5>
+        <ul>
+          <li><a href="om.html">Skoleprosjekt – ArbeidsKrav 1</a></li>
+          <li><a href="https://www.ut.no/" target="_blank" rel="noopener">Inspirert av ut.no (DNT)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Stifinner-demo. Ikke tilknyttet DNT eller ut.no.</span>
+      <span>Bygget med HTML, CSS og vanilla JS</span>
+    </div>
+  </div>
+</footer>
+
+<script src="jsIkkeBruk/data.js"></script>
+<script src="jsIkkeBruk/auth.js"></script>
+<script src="jsIkkeBruk/app.js"></script>
+<script src="jsIkkeBruk/tur-detail.js"></script>
+</body>
+</html>

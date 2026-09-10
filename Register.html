@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Registrer deg — Stifinner</title>
+<meta name="description" content="Opprett en bruker på Stifinner." />
+<link rel="icon" type="image/svg+xml" href="bilder/favicon/favicon.svg" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="register">
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="index.html">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18l6-10 4 6 2-3 6 7z"/></svg></span>
+      Stifinner
+    </a>
+    <nav class="main-nav">
+      <a href="index.html" data-page="hjem">Hjem</a>
+      <a href="kart.html" data-page="kart">Kart</a>
+      <a href="turer.html" data-page="utforsker">Utforsker</a>
+      <a href="mine-turer.html" data-page="mine-turer">Mine turer</a>
+      <a href="huskelister.html" data-page="huskelister">Huskelister</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-ghost btn-sm" href="Login.html" id="header-auth">Logg inn</a>
+      <button class="nav-toggle" aria-label="Åpne meny">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-body">
+
+<section class="wrap auth-block">
+  <div class="auth-card">
+    <h1>Registrer deg</h1>
+    <p>Opprett en bruker for å lagre turer og huskelister.</p>
+    <form class="auth-form" id="register-form" novalidate>
+      <div class="auth-error" id="register-error" hidden></div>
+      <label>
+        Navn
+        <input type="text" name="navn" autocomplete="name" required />
+      </label>
+      <label>
+        E-post
+        <input type="email" name="epost" autocomplete="email" required />
+      </label>
+      <label>
+        Passord
+        <input type="password" name="passord" autocomplete="new-password" minlength="4" required />
+      </label>
+      <label>
+        Bekreft passord
+        <input type="password" name="passordGjenta" autocomplete="new-password" minlength="4" required />
+      </label>
+      <button class="btn btn-primary" type="submit">Registrer deg</button>
+    </form>
+    <p class="auth-switch">Har du allerede en bruker? <a href="Login.html"><br>Logg inn her</a></p>
+  </div>
+</section>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color:#fff;">
+          <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18l6-10 4 6 2-3 6 7z"/></svg></span>
+          Stifinner
+        </div>
+        <p>Statisk demoside inspirert av ut.no, laget som øvingsoppgave. Ingen backend, database eller eksterne API-kall.</p>
+      </div>
+      <div>
+        <h5>Innhold</h5>
+        <ul>
+          <li><a href="turer.html">Turer</a></li>
+          <li><a href="hytter.html">Hytter</a></li>
+          <li><a href="kart.html">Kart</a></li>
+          <li><a href="huskelister.html">Huskelister</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Om siden</h5>
+        <ul>
+          <li><a href="om.html">Om prosjektet</a></li>
+          <li><a href="om.html#kontakt">Kontakt</a></li>
+          <li><a href="om.html#personvern">Personvern</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kolofon</h5>
+        <ul>
+          <li><a href="om.html">Skoleprosjekt – ArbeidsKrav 1</a></li>
+          <li><a href="https://www.ut.no/" target="_blank" rel="noopener">Inspirert av ut.no (DNT)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Stifinner-demo. Ikke tilknyttet DNT eller ut.no.</span>
+      <span>Bygget med HTML, CSS og vanilla JS</span>
+    </div>
+  </div>
+</footer>
+
+<script src="jsIkkeBruk/auth.js"></script>
+<script src="jsIkkeBruk/app.js"></script>
+<script>
+  document.getElementById("register-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const errorBox = document.getElementById("register-error");
+    if (form.passord.value !== form.passordGjenta.value) {
+      errorBox.textContent = "Passordene er ikke like.";
+      errorBox.hidden = false;
+      return;
+    }
+    const res = registerUser(form.navn.value, form.epost.value, form.passord.value);
+    if (res.ok) {
+      window.location.href = "index.html";
+    } else {
+      errorBox.textContent = res.feil;
+      errorBox.hidden = false;
+    }
+  });
+</script>
+</body>
+</html>
