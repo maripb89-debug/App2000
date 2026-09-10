@@ -7,6 +7,7 @@
 <meta name="description" content="Legg til en egen tur i Stifinner-demoen." />
 <link rel="icon" type="image/svg+xml" href="bilder/favicon/favicon.svg" />
 <link rel="stylesheet" href="css/style.css" />
+<script src="js/nyTur.js"></script>
 </head>
 <body data-page="utforsker">
 
@@ -39,6 +40,7 @@
     <h1>Legg til ny tur</h1>
     <p>Turen lagres i nettleseren din og dukker opp sammen med de andre turene i utforskeren.</p>
     <form class="auth-form" id="ny-tur-form">
+      <div class="auth-error" id="ny-tur-error" hidden></div>
       <label>
         Turnavn
         <input type="text" name="tittel" required />
@@ -61,6 +63,7 @@
 </section>
 
 </div>
+
 
 <footer class="site-footer">
   <div class="wrap">
@@ -117,6 +120,12 @@
   document.getElementById("ny-tur-form").addEventListener("submit", (e) => {
     e.preventDefault();
     const form = e.target;
+    if (!erGyldigLengde(form.lengdeKm.value)) {
+  document.getElementById("ny-tur-error").textContent = "Lengden må være et tall mellom 1 og 500 km.";
+  document.getElementById("ny-tur-error").hidden = false;
+  return;
+}
+
     const tur = leggTilEgenTur({
       tittel: form.tittel.value.trim(),
       kort: form.kort.value.trim(),
