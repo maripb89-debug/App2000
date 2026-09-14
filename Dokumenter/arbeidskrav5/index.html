@@ -14,6 +14,7 @@
     --ink-soft: #5b5a53;
   }
   * { box-sizing: border-box; }
+  html { font-size: 18px; }
   body {
     margin: 0;
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -23,62 +24,66 @@
   header {
     background: var(--forest);
     color: #fff;
-    padding: 32px 24px;
+    padding: 48px 32px;
   }
-  header h1 { margin: 0 0 8px; font-size: 1.6rem; }
-  header p { margin: 0; color: rgba(255,255,255,0.8); max-width: 640px; }
+  header h1 { margin: 0 0 14px; font-size: 2.4rem; line-height: 1.2; }
+  header p { margin: 0; color: rgba(255,255,255,0.85); max-width: 760px; font-size: 1.15rem; line-height: 1.6; }
+  header code { background: rgba(255,255,255,0.15); padding: 2px 6px; border-radius: 4px; }
+  header a { color: #fff; }
   main {
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 32px 24px 64px;
+    padding: 48px 32px 80px;
   }
   #hytte-liste {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 32px;
   }
   .hytte-kort {
     background: #fff;
     border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 20px;
+    border-radius: 14px;
+    padding: 32px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
   }
   .hytte-kort h3 {
-    margin: 0 0 10px;
+    margin: 0 0 16px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 1.2rem;
+    gap: 14px;
+    font-size: 1.7rem;
   }
   .badge {
     background: var(--forest);
     color: #fff;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    padding: 4px 10px;
+    padding: 6px 14px;
     border-radius: 999px;
   }
-  .hytte-kort p { margin: 0 0 10px; color: var(--ink-soft); line-height: 1.5; }
+  .hytte-kort p { margin: 0 0 16px; color: var(--ink-soft); line-height: 1.6; font-size: 1.1rem; }
   .hytte-meta {
     list-style: none;
     padding: 0;
-    margin: 0 0 12px;
+    margin: 0 0 18px;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 16px;
-    font-size: 0.9rem;
+    gap: 10px 24px;
+    font-size: 1.05rem;
+    font-weight: 600;
     color: var(--ink);
   }
-  .fasiliteter { font-size: 0.85rem; }
-  .kontakt { font-size: 0.85rem; color: var(--ink-soft); margin: 0; }
+  .fasiliteter { font-size: 1.05rem; }
+  .kontakt { font-size: 1.05rem; color: var(--ink-soft); margin: 0; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Arbeidskrav 5 — Visning av JSON-hyttedata med TypeScript</h1>
+  <h1>Oppgave 5 — Visning av JSON-hyttedata med TypeScript</h1>
   <p>Kortene under er tegnet av <code>visHytter()</code> i <code>visHytter.ts</code> (kompilert til <code>dist/visHytter.js</code>), ut fra det hardkodede eksempelet i filen. Se <a href="svar.md">svar.md</a> for full besvarelse.</p>
 </header>
 
