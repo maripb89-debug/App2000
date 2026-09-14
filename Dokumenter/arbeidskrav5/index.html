@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Arbeidskrav 5 — Hyttevisning</title>
+<style>
+  :root {
+    --forest: #22463a;
+    --forest-dark: #16302a;
+    --paper: #f7f5f0;
+    --line: #ddd7c9;
+    --ink: #262622;
+    --ink-soft: #5b5a53;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  header {
+    background: var(--forest);
+    color: #fff;
+    padding: 32px 24px;
+  }
+  header h1 { margin: 0 0 8px; font-size: 1.6rem; }
+  header p { margin: 0; color: rgba(255,255,255,0.8); max-width: 640px; }
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+  #hytte-liste {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .hytte-kort {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .hytte-kort h3 {
+    margin: 0 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+  }
+  .badge {
+    background: var(--forest);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .hytte-kort p { margin: 0 0 10px; color: var(--ink-soft); line-height: 1.5; }
+  .hytte-meta {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+  .fasiliteter { font-size: 0.85rem; }
+  .kontakt { font-size: 0.85rem; color: var(--ink-soft); margin: 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Arbeidskrav 5 — Visning av JSON-hyttedata med TypeScript</h1>
+  <p>Kortene under er tegnet av <code>visHytter()</code> i <code>visHytter.ts</code> (kompilert til <code>dist/visHytter.js</code>), ut fra det hardkodede eksempelet i filen. Se <a href="svar.md">svar.md</a> for full besvarelse.</p>
+</header>
+
+<main>
+  <div id="hytte-liste"></div>
+</main>
+
+<script src="dist/visHytter.js"></script>
+</body>
+</html>

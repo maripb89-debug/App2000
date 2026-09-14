@@ -4,12 +4,15 @@ Filene i denne mappa:
 
 - [`hyttedata.json`](./hyttedata.json) — hardkodet eksempel på hyttedata.
 - [`visHytter.ts`](./visHytter.ts) — TypeScript-funksjoner som viser dataene.
+- [`index.html`](./index.html) — viser hyttekortene i nettleseren, ved å laste inn `dist/visHytter.js`.
 
 Kompilert og kjørt for å bekrefte at koden faktisk fungerer (se «Hvordan kan koden testes» nederst).
 
+**For å se resultatet i nettleseren:** åpne `index.html` — den laster `dist/visHytter.js`, som er lagt ved ferdig kompilert. Endrer du noe i `visHytter.ts`, må du kjøre kompileringskommandoen under punkt 4 på nytt for at `index.html` skal vise endringen (`dist/` er et bygg-resultat, ikke kildekoden i seg selv — `visHytter.ts` er fasiten).
+
 ## 1. Forslag til JSON-representasjon
 
-Turappen trenger å vise en liste med hytter, der hver hytte har både enkle felt (navn, region), et par **underobjekter** (posisjon, kontaktinfo) og **arrays** (fasiliteter, og en liste med romtyper). Strukturen jeg foreslår:
+Turappen trenger å vise en liste med hytter, der hver hytte har både enkle felt (navn, region), et par **underobjekter** (posisjon, kontaktinfo) og **arrays** (fasiliteter, og en liste med romtyper).
 
 ```
 {
