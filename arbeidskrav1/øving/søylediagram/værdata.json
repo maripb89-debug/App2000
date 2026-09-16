@@ -1,0 +1,30 @@
+{
+	"sted": "Telemark",
+	"data": [
+		{
+			"maaned": "Januar",
+			"nedbor": 82,
+			"temperatur": -3.2
+		},
+		{
+			"maaned": "Februar",
+			"nedbor": 65,
+			"temperatur": -2.1
+		},
+		{
+			"maaned": "Mars",
+			"nedbor": 58,
+			"temperatur": 1.4
+		},
+		{
+			"maaned": "April",
+			"nedbor": 47,
+			"temperatur": 6.8
+		},
+		{
+			"maaned": "Mai",
+			"nedbor": 61,
+			"temperatur": 12.1
+		}
+	]
+}

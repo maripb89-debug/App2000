@@ -1,0 +1,424 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Manrope:wght@700;800&display=swap");
+
+/* Felles farger for hele turappen. */
+:root {
+    --skog: #173f35;
+    --skog-lys: #2d6a56;
+    --mose: #dbe8dc;
+    --sol: #e6a34a;
+    --krem: #f7f4ec;
+    --hvit: #fffdf9;
+    --tekst: #1e2b27;
+    --dempet: #64736d;
+    --linje: #d9e0da;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Grunnstil som gjelder alle sider. */
+body {
+    margin: 0;
+    background: var(--krem);
+    color: var(--tekst);
+    font-family: "DM Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+.logo {
+    font-family: "Manrope", sans-serif;
+}
+
+h1 {
+    margin-bottom: 1rem;
+    color: var(--skog);
+    font-size: clamp(2.6rem, 6vw, 5.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+}
+
+h2 {
+    margin-bottom: 0.6rem;
+    color: var(--skog);
+    font-size: 1.8rem;
+}
+
+h3 {
+    margin-bottom: 0.35rem;
+    color: var(--skog);
+}
+
+a {
+    color: inherit;
+}
+
+.toppmeny {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(100% - 3rem, 78rem);
+    margin: 0 auto;
+    padding: 1.5rem 0;
+}
+
+.logo {
+    color: var(--skog);
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.tekstlenke,
+.toppmeny nav a {
+    color: var(--skog);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.toppmeny nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.aktiv-lenke {
+    border-bottom: 2px solid var(--sol);
+}
+
+/* Forsidens hovedoppsett med tekst, bilde og innlogging. */
+.forside-layout {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 3rem;
+    align-items: center;
+    width: min(100% - 3rem, 78rem);
+    margin: 2rem auto 5rem;
+}
+
+.hero-innhold {
+    padding: 2rem 0;
+}
+
+.overlinje {
+    margin-bottom: 0.8rem;
+    color: var(--skog-lys);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.intro,
+.panel-intro,
+.side-intro p {
+    max-width: 34rem;
+    color: var(--dempet);
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+
+.sekundaer-knapp,
+.hovedknapp {
+    display: inline-block;
+    border: 0;
+    background: var(--skog);
+    color: var(--hvit);
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 160ms ease, transform 160ms ease;
+}
+
+.sekundaer-knapp {
+    margin-top: 1rem;
+    padding: 0.85rem 1.1rem;
+}
+
+.sekundaer-knapp:hover,
+.hovedknapp:hover {
+    background: var(--skog-lys);
+    transform: translateY(-2px);
+}
+
+.hero-bilde {
+    position: relative;
+    min-height: 33rem;
+    margin: 0;
+    overflow: hidden;
+    background: var(--mose);
+}
+
+.hero-bilde img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 33rem;
+    object-fit: cover;
+}
+
+.hero-bilde figcaption {
+    /* Bildeteksten plasseres oppå bildet. */
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    padding: 0.55rem 0.7rem;
+    background: var(--hvit);
+    color: var(--skog);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+/* Felles utseende for innloggings- og turregistreringsskjemaet. */
+.innlogging-panel,
+.skjema-panel {
+    padding: 2rem;
+    background: var(--hvit);
+    border: 1px solid var(--linje);
+    box-shadow: 0 1rem 2.5rem rgba(23, 63, 53, 0.08);
+}
+
+.innlogging-panel {
+    grid-column: 1 / 2;
+    width: min(100%, 28rem);
+}
+
+.skjema {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.skjema label {
+    margin-top: 0.65rem;
+    color: var(--skog);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.skjema input,
+.skjema select,
+.skjema textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #aab9b0;
+    border-radius: 2px;
+    background: var(--hvit);
+    color: var(--tekst);
+    font: inherit;
+}
+
+.skjema textarea {
+    min-height: 6rem;
+    resize: vertical;
+}
+
+.skjema input:focus,
+.skjema select:focus,
+.skjema textarea:focus {
+    outline: 3px solid var(--mose);
+    border-color: var(--skog-lys);
+}
+
+.skjema input:invalid:not(:placeholder-shown),
+.skjema textarea:invalid:not(:placeholder-shown) {
+    border-color: #b34e43;
+}
+
+.hovedknapp {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+}
+
+.skjema-melding {
+    min-height: 1.4rem;
+    margin: 0.8rem 0 0;
+    color: var(--skog-lys);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.liten-tekst {
+    margin: 0;
+    color: var(--dempet);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.app-side {
+    min-height: 100vh;
+    background: #eef3ed;
+}
+
+.toppmeny-app {
+    border-bottom: 1px solid var(--linje);
+}
+
+.app-innhold {
+    width: min(100% - 3rem, 78rem);
+    margin: 0 auto;
+    padding: 4rem 0 6rem;
+}
+
+.side-intro,
+.seksjonstopp {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.side-intro {
+    margin-bottom: 3rem;
+}
+
+.side-intro h1 {
+    margin-bottom: 0.5rem;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+}
+
+.brukermerke {
+    padding: 0.65rem 0.85rem;
+    background: var(--mose);
+    color: var(--skog);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+/* Innlogget side med turlisten og skjemaet ved siden av hverandre. */
+.app-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.8fr);
+    gap: 2rem;
+    align-items: start;
+}
+
+.tur-liste,
+.skjema-panel {
+    background: var(--hvit);
+    border: 1px solid var(--linje);
+}
+
+.tur-liste {
+    min-height: 25rem;
+    padding: 2rem;
+}
+
+.tur-antall {
+    color: var(--dempet);
+    font-size: 0.9rem;
+}
+
+.turkort-liste {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+}
+
+/* Turkortene lages dynamisk av turapp.js. */
+.turkort {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    border-left: 4px solid var(--sol);
+    background: #f5f7f2;
+}
+
+.turkort p {
+    margin-bottom: 0.35rem;
+}
+
+.turkort-sted {
+    color: var(--skog-lys);
+}
+
+.turkort-detaljer,
+.turkort-beskrivelse,
+.tom-liste {
+    color: var(--dempet);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.turkort-beskrivelse {
+    margin-top: 0.8rem;
+}
+
+.tom-liste {
+    margin: 2rem 0 0;
+}
+
+.slett-knapp {
+    align-self: flex-start;
+    padding: 0.35rem 0.55rem;
+    border: 1px solid var(--linje);
+    background: transparent;
+    color: var(--dempet);
+    font: inherit;
+    cursor: pointer;
+}
+
+.slett-knapp:hover {
+    border-color: #b34e43;
+    color: #b34e43;
+}
+
+@media (max-width: 50rem) {
+    .forside-layout,
+    .app-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .innlogging-panel {
+        grid-column: auto;
+        width: 100%;
+    }
+
+    .hero-bilde,
+    .hero-bilde img {
+        min-height: 25rem;
+    }
+}
+
+@media (max-width: 35rem) {
+    .toppmeny,
+    .forside-layout,
+    .app-innhold {
+        width: min(100% - 2rem, 78rem);
+    }
+
+    .forside-layout {
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .innlogging-panel,
+    .skjema-panel,
+    .tur-liste {
+        padding: 1.25rem;
+    }
+
+    .side-intro,
+    .seksjonstopp {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .toppmeny nav {
+        gap: 0.8rem;
+    }
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html> <!-- Forteller nettleseren at dette er HTML5. -->
+<html lang="no"> <!-- Angir at innholdet er på norsk. -->
+<head>
+    <meta charset="UTF-8"> <!-- Sørger for at norske tegn vises riktig. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Gjør siden mobilvennlig. -->
+    <script src="tabell.js" defer></script> <!-- Kjører tabellkoden etter at HTML-en er lest. -->
+    <title>Vareliste</title> <!-- Teksten som vises i nettleserfanen. -->
+</head>
+<body>
+    <main> <!-- Inneholder hovedinnholdet på siden. -->
+        <h1>Vareliste</h1> <!-- Sidens hovedoverskrift. -->
+
+        <table data-json="vare.json"> <!-- data-json bestemmer hvilken JSON-fil som leses. -->
+            <caption>JSON-resultat</caption> <!-- Forklarer hva tabellen viser. -->
+            <thead> <!-- JavaScript lager kolonneoverskriftene her. -->
+            </thead>
+            <tbody> <!-- JavaScript legger varelinjene inn her. -->
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

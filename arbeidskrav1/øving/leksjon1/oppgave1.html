@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="oppgave1.css">
+    <script src="oppgave1.js" defer></script>
+    <title>Registrer bruker</title>
+</head>
+<body>
+    <main class="skjema-side">
+        <h1>Registrer bruker</h1>
+
+        <form id="registreringsskjema" class="skjema">
+            <label for="navn">Navn</label>
+            <input type="text" id="navn" name="navn" required minlength="2">
+
+            <label for="epost">E-post</label>
+            <input type="email" id="epost" name="epost" required>
+
+            <label for="passord">Passord</label>
+            <input type="password" id="passord" name="passord"
+                   required minlength="8">
+
+            <label for="gjentaPassord">Gjenta passord</label>
+            <input type="password" id="gjentaPassord"
+                   name="gjentaPassord" required>
+
+            <button type="submit">Registrer</button>
+        </form>
+
+        <p id="melding"></p>
+    </main>
+</body>
+</html>

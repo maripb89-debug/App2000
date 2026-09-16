@@ -1,0 +1,62 @@
+[
+	{
+		"id": 1,
+		"navn": "Fjellro",
+		"sted": "Geilo",
+		"beliggenhet": {
+			"område": "Hallingdal",
+			"type": "fjellhytte"
+		},
+		"sengeplasser": 6,
+		"prisPerNatt": 1450,
+		"fasiliteter": ["peis", "badstue", "wifi"]
+	},
+	{
+		"id": 2,
+		"navn": "Utsikten",
+		"sted": "Hemsedal",
+		"beliggenhet": {
+			"område": "Skogshorn",
+			"type": "fjellhytte"
+		},
+		"sengeplasser": 8,
+		"prisPerNatt": 2200,
+		"fasiliteter": ["peis", "terrasse", "skiløype i nærheten"]
+	},
+	{
+		"id": 3,
+		"navn": "Skogheim",
+		"sted": "Trysil",
+		"beliggenhet": {
+			"område": "Trysilfjellet",
+			"type": "skogshytte"
+		},
+		"sengeplasser": 4,
+		"prisPerNatt": 1100,
+		"fasiliteter": ["grill", "fiskevann i nærheten", "hund tillatt"]
+	},
+	{
+		"id": 4,
+		"navn": "Sjøgløtt",
+		"sted": "Kragerø",
+		"beliggenhet": {
+			"område": "Skjærgården",
+			"type": "sjøhytte"
+		},
+		"sengeplasser": 5,
+		"prisPerNatt": 1750,
+		"fasiliteter": ["båtplass", "terrasse", "havutsikt"]
+	},
+	{
+		"id": 5,
+		"navn": "Nordlyset",
+		"sted": "Tromsø",
+		"beliggenhet": {
+			"område": "Kvaløya",
+			"type": "nordlyshytte"
+		},
+		"sengeplasser": 7,
+		"prisPerNatt": 2600,
+		"fasiliteter": ["jacuzzi", "wifi", "parkering"]
+	}
+]

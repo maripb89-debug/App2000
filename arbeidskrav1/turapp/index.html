@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="no"> <!-- Forteller nettleser og skjermleser at siden er norsk. -->
+<head>
+    <meta charset="UTF-8"> <!-- Gjør at norske tegn vises riktig. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Tilpasser siden til mobil. -->
+    <link rel="stylesheet" href="turapp.css"> <!-- Kobler HTML til felles CSS. -->
+    <script src="turapp.js" defer></script> <!-- Laster JS etter HTML-en er lest. -->
+    <title>UTsikt - Finn din neste tur</title>
+</head>
+<body class="forside">
+    <header class="toppmeny">
+        <a class="logo" href="index.html">UTsikt</a>
+        <a class="tekstlenke" href="#innlogging">Logg inn</a>
+    </header>
+
+    <main class="forside-layout">
+        <section class="hero-innhold" aria-labelledby="velkommen"> <!-- Kobler området til overskriften. -->
+            <p class="overlinje">Turer nær deg</p>
+            <h1 id="velkommen">Mer utsikt.<br>Mer ut på tur.</h1>
+            <p class="intro">
+                Finn inspirasjon, planlegg neste topptur og samle dine egne
+                turfavoritter på ett sted.
+            </p>
+            <a class="sekundaer-knapp" href="#innlogging">Start turplanleggingen</a> <!-- Hopper til innlogging. -->
+        </section>
+
+        <figure class="hero-bilde"> <!-- Samler bildet og bildeteksten. -->
+            <img src="https://dbsys.info/2000/prosjekt/julian-hanslmaier-afyeajNGFKg-unsplash.jpg"
+                 alt="Fjellandskap med utsikt mot høye fjelltopper">
+            <figcaption>Topptur til nye perspektiver</figcaption> <!-- Bildetekst til bildet. -->
+        </figure>
+
+        <section class="innlogging-panel" id="innlogging" aria-labelledby="logg-inn"> <!-- id brukes av lenken over. -->
+            <p class="overlinje">Din turdagbok</p>
+            <h2 id="logg-inn">Logg inn</h2>
+            <p class="panel-intro">Fortsett der du slapp, eller lag en ny turplan.</p>
+
+            <form id="innloggingsskjema" class="skjema"> <!-- JavaScript håndterer innloggingen. -->
+                <label for="innloggings-epost">E-post</label>
+                  <input type="email" id="innloggings-epost" name="epost"
+                      autocomplete="email" required> <!-- required og type gir HTML-validering. -->
+
+                <label for="innloggings-passord">Passord</label>
+                  <input type="password" id="innloggings-passord" name="passord"
+                       minlength="8" autocomplete="current-password" required>
+
+                <button class="hovedknapp" type="submit">Logg inn</button>
+            </form>
+            <p id="innloggingsmelding" class="skjema-melding" aria-live="polite"></p>
+            <p class="liten-tekst">Demo: bruk en gyldig e-postadresse og minst 8 tegn i passordet.</p>
+        </section>
+    </main>
+</body>
+</html>

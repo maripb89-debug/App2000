@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="no"> <!-- Forteller nettleser og skjermleser at siden er norsk. -->
+<head>
+    <meta charset="UTF-8"> <!-- Gjør at norske tegn vises riktig. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Tilpasser siden til mobil. -->
+    <link rel="stylesheet" href="turapp.css"> <!-- Bruker turappens felles styling. -->
+    <script src="turapp.js" defer></script> <!-- Laster JS etter HTML-en er lest. -->
+    <title>Mine turer - UTsikt</title>
+</head>
+<body class="app-side">
+    <header class="toppmeny toppmeny-app">
+        <a class="logo" href="index.html">UTsikt</a>
+        <nav aria-label="Hovedmeny">
+            <a class="aktiv-lenke" href="mine-turer.html">Mine turer</a>
+            <a href="index.html" id="logg-ut">Logg ut</a>
+        </nav>
+    </header>
+
+    <main class="app-innhold">
+        <section class="side-intro" aria-labelledby="side-tittel"> <!-- Kobler området til overskriften. -->
+            <div>
+                <p class="overlinje">Personlig oversikt</p>
+                <h1 id="side-tittel">Mine turer</h1>
+                <p>Planlegg turene du gleder deg til, og hold oversikt over stedene du vil utforske.</p>
+            </div>
+            <div class="brukermerke" aria-label="Innlogget bruker">
+                <span id="brukernavn">Turvenn</span>
+            </div>
+        </section>
+
+        <section class="app-grid">
+            <section class="tur-liste" aria-labelledby="turer-tittel">
+                <div class="seksjonstopp">
+                    <div>
+                        <p class="overlinje">Samlingen din</p>
+                        <h2 id="turer-tittel">Planlagte turer</h2>
+                    </div>
+                    <span class="tur-antall" id="tur-antall">0 turer</span>
+                </div>
+                <div id="turkort-liste" class="turkort-liste"></div> <!-- id er målet som JS fyller med turkort. -->
+                <p id="tom-liste" class="tom-liste">Du har ingen turer ennå. Legg til den første planen din.</p>
+            </section>
+
+            <section class="skjema-panel" aria-labelledby="ny-tur-tittel">
+                <p class="overlinje">Ny plan</p>
+                <h2 id="ny-tur-tittel">Legg til tur</h2>
+                <form id="tur-skjema" class="skjema"> <!-- JS validerer og lagrer nye turer. -->
+                    <label for="tur-navn">Navn på tur</label>
+                          <input type="text" id="tur-navn" name="turNavn"
+                              placeholder="For eksempel Gaustatoppen" minlength="2" required> <!-- id kobler feltet til label og JS. -->
+
+                    <label for="tur-sted">Sted</label>
+                    <input type="text" id="tur-sted" name="turSted"
+                           placeholder="For eksempel Telemark" required>
+
+                    <label for="tur-dato">Dato</label>
+                    <input type="date" id="tur-dato" name="turDato" required>
+
+                    <label for="tur-vanskelighet">Vanskelighetsgrad</label>
+                    <select id="tur-vanskelighet" name="turVanskelighet" required>
+                        <option value="">Velg vanskelighetsgrad</option>
+                        <option value="Enkel">Enkel</option>
+                        <option value="Middels">Middels</option>
+                        <option value="Krevende">Krevende</option>
+                    </select>
+
+                    <label for="tur-beskrivelse">Kort beskrivelse</label>
+                    <textarea id="tur-beskrivelse" name="turBeskrivelse"
+                              placeholder="Hva gleder du deg mest til?" maxlength="180"></textarea>
+
+                    <button class="hovedknapp" type="submit">Lagre tur</button>
+                </form>
+                <p id="tur-melding" class="skjema-melding" aria-live="polite"></p>
+            </section>
+        </section>
+    </main>
+</body>
+</html>
